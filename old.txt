@@ -1,0 +1,60 @@
+// CREATE
+	// // //input
+	// account := accounts.Person{}
+	// account.Name = "Herry"
+	// account.Password = "password"
+
+	// err = db.Create(&account).Error
+	// if err != nil {
+	// 	fmt.Println("Error creating record")
+	// }
+
+	// READ
+	// var person accounts.Person
+	// err = db.First(&person).Error
+	// if err != nil {
+	// 	fmt.Println("error creating record")
+
+	// }
+	// fmt.Println("name: ", person.Name)
+	// fmt.Println("Password: ", person.Password)
+
+	// qyery all data
+
+	var persons []accounts.Person
+
+	// query all data
+	err = db.Find(&persons).Error
+	if err != nil {
+		fmt.Println("error creating record")
+
+	}
+
+	for _, b := range persons {
+		fmt.Println("Name:", b.Name)
+		fmt.Println("Password", b.Password)
+
+	}
+
+	// //UPDATE
+	// QUERY DATA WHEN ID =1
+	var person accounts.Person
+	err = db.Where("id = ?", 1).First(&person).Error
+	if err != nil {
+		fmt.Println("error creating record")
+
+	}
+	person.Name = "Tony Jaa"
+	person.Password = "19035"
+	err = db.Save(&person).Error
+	if err != nil {
+		fmt.Println("Error Creating Record")
+	}
+
+	// db.Model(&person).Updates(accounts.Person{Name: "Tini", Password: "pass"})
+
+	// DELETE
+	err = db.Debug().Where("id = ?", 0).Delete(&person).Error
+	if err != nil {
+		fmt.Println("Erorr Creating Record")
+	}
