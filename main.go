@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// refer https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
-	dsn := "host=localhost user=payment password=payment dbname=payment port=5432 sslmode=disable TimeZone=Asia/Jakarta"
+	dsn := "host=postgres user=payment password=payment dbname=payment port=5432 sslmode=disable TimeZone=Asia/Jakarta"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("DB conn Error")
