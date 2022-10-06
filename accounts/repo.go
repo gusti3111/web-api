@@ -7,6 +7,7 @@ type Repo interface {
 	FindByID(ID int) (Person, error)
 	Create(person Person) (Person, error)
 	Update(person Person) (Person, error)
+	Delete(person Person)(Person,error)
 }
 
 type repo struct {
@@ -43,5 +44,8 @@ func (r *repo) Create(person Person) (Person, error) {
 func (r *repo) Update(person Person) (Person, error) {
 	err := r.db.Save(&person).Error
 	return person, err
-
+}
+func (r *repo) Delete(person Person) (Person, error) {
+	err := r.db.Delete(&person).Error
+	return person, err
 }

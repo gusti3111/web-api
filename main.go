@@ -51,6 +51,8 @@ func main() {
 	v1.GET("/accounts", personHandler.GetHandler)
 	v1.POST("/accounts", personHandler.PostHandler)
 	v1.GET("/accounts/:id", personHandler.GetHandlerid)
+	v1.PUT("/accounts/:id", personHandler.UpdateHandler)
+	v1.DELETE("/accounts/:id", personHandler.DeleteHandler)
 
 	router.Run(":8080")
 

@@ -7,6 +7,7 @@ type Services interface {
 	FindByID(ID int) (Person, error)
 	Create(user User) (Person, error)
 	Update(ID int, user User) (Person, error)
+	Delete(ID int) (Person, error)
 }
 
 type services struct {
@@ -40,16 +41,18 @@ func (s *services) Create(user User) (Person, error) {
 	return newperson, err
 
 }
-func (s *services) Update(ID int,user User) (Person, error) {
-	user,err := s.repo.FindByID(ID)
+func (s *services) Update(ID int, user User) (Person, error) {
+	person, err := s.repo.FindByID(ID)
 	pass, _ := json.Marshal(user.Password)
-
-	user.Name=     user.Name
-	user.Password = string(pass)
-	newperson, err := s.repo.Update(user)
+	person.Name = user.Name
+	person.Password = string(pass)
+	newperson, err := s.repo.Update(person)
 	return newperson, err
 
 }
+func (s *services) Delete(ID int) (Person, error) {
+	person, err := s.repo.FindByID(ID)
+	newperson, err := s.repo.Delete(person)
+	return newperson, err
 
-
-
+}
