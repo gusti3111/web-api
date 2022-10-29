@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:5.7
+  
+    environment:
+       MYSQL_USER: 'root'
+       MYSQL_ROOT_PASSWORD: '12345'
+       MYSQL_PASSWORD: '12345'
+       MYSQL_DATABASE: 'product'
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+    
+     - my-db:/var/lib/mysql
+
+   
+  
+    restart: always
+
+
+  #web container image
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+
+    environment:
+       MYSQL_USER: 'root'
+       MYSQL_ROOT_PASSWORD: '12345'
+       MYSQL_PASSWORD: '12345'
+       MYSQL_DATABASE: 'product'
+    ports:
+      - "8080:9000"
+    depends_on:
+      - mysql
+    networks:
+      - default
+    restart: unless-stopped
+volumes:
+  my-db:
+
+  
